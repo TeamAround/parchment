@@ -14,6 +14,8 @@ import ClassAttributor from './attributor/class';
 import StyleAttributor from './attributor/style';
 import AttributorStore from './attributor/store';
 
+import { setWindow, getWindow, getDocument } from './window'
+
 import * as Registry from './registry';
 
 let Parchment = {
@@ -41,6 +43,10 @@ let Parchment = {
 
     Store: AttributorStore,
   },
+
+  getWindow: getWindow,
+  setWindow: setWindow,
+  getDocument: getDocument,
 };
 
 export default Parchment;

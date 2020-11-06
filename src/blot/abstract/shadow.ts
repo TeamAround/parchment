@@ -1,5 +1,6 @@
 import { Blot, Parent, Formattable } from './blot';
 import * as Registry from '../../registry';
+import { getDocument } from '../../window';
 
 class ShadowBlot implements Blot {
   static blotName = 'abstract';
@@ -34,14 +35,14 @@ class ShadowBlot implements Blot {
         }
       }
       if (typeof value === 'number') {
-        node = document.createElement(this.tagName[value - 1]);
+        node = getDocument().createElement(this.tagName[value - 1]);
       } else if (this.tagName.indexOf(value) > -1) {
-        node = document.createElement(value);
+        node = getDocument().createElement(value);
       } else {
-        node = document.createElement(this.tagName[0]);
+        node = getDocument().createElement(this.tagName[0]);
       }
     } else {
-      node = document.createElement(this.tagName);
+      node = getDocument().createElement(this.tagName);
     }
     if (this.className) {
       node.classList.add(this.className);

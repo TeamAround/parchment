@@ -1,6 +1,7 @@
 import { Blot, Leaf } from './abstract/blot';
 import LeafBlot from './abstract/leaf';
 import * as Registry from '../registry';
+import { getDocument } from '../window';
 
 class TextBlot extends LeafBlot implements Leaf {
   static blotName = 'text';
@@ -10,7 +11,7 @@ class TextBlot extends LeafBlot implements Leaf {
   protected text: string;
 
   static create(value: string): Text {
-    return document.createTextNode(value);
+    return getDocument().createTextNode(value);
   }
 
   static value(domNode: Text): string {

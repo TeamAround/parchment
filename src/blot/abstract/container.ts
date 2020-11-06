@@ -2,6 +2,7 @@ import { Blot, Parent, Leaf } from './blot';
 import LinkedList from '../../collection/linked-list';
 import ShadowBlot from './shadow';
 import * as Registry from '../../registry';
+import { getDocument } from '../../window';
 
 class ContainerBlot extends ShadowBlot implements Parent {
   static defaultChild: string;
@@ -208,7 +209,7 @@ class ContainerBlot extends ShadowBlot implements Parent {
         node.parentNode != null &&
         // @ts-ignore
         node.tagName !== 'IFRAME' &&
-        document.body.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY
+        getDocument().body.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY
       ) {
         return;
       }

@@ -1,5 +1,6 @@
 import Attributor from './attributor/attributor';
 import { Blot, Formattable } from './blot/abstract/blot';
+import { getDocument } from './window';
 
 export interface BlotConstructor {
   blotName: string;
@@ -80,13 +81,15 @@ export function query(
     } else if (query & Scope.LEVEL & Scope.INLINE) {
       match = types['inline'];
     }
-  } else if (query instanceof HTMLElement) {
-    let names = (query.getAttribute('class') || '').split(/\s+/);
+  }
+  // @ts-ignore.
+  else if (query instanceof getDocument().defaultView.HTMLElement) {
+    let names = ((query as HTMLElement).getAttribute('class') || '').split(/\s+/);
     for (let i in names) {
       match = classes[names[i]];
       if (match) break;
     }
-    match = match || tags[query.tagName];
+    match = match || tags[(query as HTMLElement).tagName];
   }
   if (match == null) return null;
   // @ts-ignore
