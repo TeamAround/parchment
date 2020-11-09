@@ -209,7 +209,7 @@ class ContainerBlot extends ShadowBlot implements Parent {
         node.parentNode != null &&
         // @ts-ignore
         node.tagName !== 'IFRAME' &&
-        getDocument().body.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY
+        (node.ownerDocument && node.ownerDocument.body.compareDocumentPosition(node) || 0) & Node.DOCUMENT_POSITION_CONTAINED_BY
       ) {
         return;
       }

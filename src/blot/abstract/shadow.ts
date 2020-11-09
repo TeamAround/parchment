@@ -26,6 +26,7 @@ class ShadowBlot implements Blot {
     if (this.tagName == null) {
       throw new Registry.ParchmentError('Blot definition missing tagName');
     }
+    const doc = getDocument() || document;
     let node;
     if (Array.isArray(this.tagName)) {
       if (typeof value === 'string') {
@@ -35,14 +36,14 @@ class ShadowBlot implements Blot {
         }
       }
       if (typeof value === 'number') {
-        node = getDocument().createElement(this.tagName[value - 1]);
+        node = doc.createElement(this.tagName[value - 1]);
       } else if (this.tagName.indexOf(value) > -1) {
-        node = getDocument().createElement(value);
+        node = doc.createElement(value);
       } else {
-        node = getDocument().createElement(this.tagName[0]);
+        node = doc.createElement(this.tagName[0]);
       }
     } else {
-      node = getDocument().createElement(this.tagName);
+      node = doc.createElement(this.tagName);
     }
     if (this.className) {
       node.classList.add(this.className);

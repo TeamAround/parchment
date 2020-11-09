@@ -1,6 +1,5 @@
 import Attributor from './attributor/attributor';
-import { Blot, Formattable } from './blot/abstract/blot';
-import { getDocument } from './window';
+import { Blot } from './blot/abstract/blot';
 
 export interface BlotConstructor {
   blotName: string;
@@ -83,7 +82,7 @@ export function query(
     }
   }
   // @ts-ignore.
-  else if (query instanceof getDocument().defaultView.HTMLElement) {
+  else if ('ownerDocument' in query && query instanceof query.ownerDocument.defaultView.HTMLElement) {
     let names = ((query as HTMLElement).getAttribute('class') || '').split(/\s+/);
     for (let i in names) {
       match = classes[names[i]];
