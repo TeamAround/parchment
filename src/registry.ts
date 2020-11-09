@@ -51,8 +51,11 @@ export function create(input: Node | string | Scope, value?: any): Blot {
   }
   let BlotClass = <BlotConstructor>match;
   let node =
+    input instanceof Node ||
     // @ts-ignore
-    input instanceof Node || input['nodeType'] === Node.TEXT_NODE ? input : BlotClass.create(value);
+    (typeof input === 'object' && 'ownerDocument' in input && input instanceof input.ownerDocument.defaultView.Node) ||
+    // @ts-ignore
+    input['nodeType'] === Node.TEXT_NODE ? input : BlotClass.create(value);
   return new BlotClass(<Node>node, value);
 }
 
