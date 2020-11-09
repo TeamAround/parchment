@@ -82,7 +82,7 @@ export function query(
     }
   }
   // @ts-ignore.
-  else if ('ownerDocument' in query && query instanceof query.ownerDocument.defaultView.HTMLElement) {
+  else if (query instanceof HTMLElement || ('ownerDocument' in query && query instanceof query.ownerDocument.defaultView.HTMLElement)) {
     let names = ((query as HTMLElement).getAttribute('class') || '').split(/\s+/);
     for (let i in names) {
       match = classes[names[i]];
